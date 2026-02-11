@@ -1,17 +1,13 @@
-html2canvas
-===========
+html2canvas-pixelart
+====================
 
-[Homepage](https://html2canvas.hertzen.com) | [Downloads](https://github.com/niklasvh/html2canvas/releases) | [Questions](https://github.com/niklasvh/html2canvas/discussions/categories/q-a)
+[Downloads](https://github.com/Kriegberg/html2canvas-pixelart/releases)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/niklasvh/html2canvas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
-![CI](https://github.com/niklasvh/html2canvas/workflows/CI/badge.svg?branch=master)
-[![NPM Downloads](https://img.shields.io/npm/dm/html2canvas.svg)](https://www.npmjs.org/package/html2canvas)
-[![NPM Version](https://img.shields.io/npm/v/html2canvas.svg)](https://www.npmjs.org/package/html2canvas)
+### JavaScript HTML renderer optimised for pixel art ###
 
-#### JavaScript HTML renderer ####
+**html2canvas-pixelart** is a fork of html2canvas version 1.4.1 which disables image smoothing for crisp pixel art rendering. Please kindly note that this fork uses some any types `(this.ctx as any)` when disabling image smoothing. It works for my use case but your mileage may vary.
 
- The script allows you to take "screenshots" of webpages or parts of it, directly on the users browser. The screenshot is based on the DOM and as such may not be 100% accurate to the real representation as it does not make an actual screenshot, but builds the screenshot based on the information available on the page.
-
+The script allows you to take "screenshots" of webpages or parts of it, directly on the users browser. The screenshot is based on the DOM and as such may not be 100% accurate to the real representation as it does not make an actual screenshot, but builds the screenshot based on the information available on the page.
 
 ### How does it work? ###
 The script renders the current page as a canvas image, by reading the DOM and the different styles applied to the elements.
@@ -50,11 +46,11 @@ The function returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/Ja
 
 ### Building ###
 
-You can download ready builds [here](https://github.com/niklasvh/html2canvas/releases).
+You can download ready builds [here](https://github.com/Kriegberg/html2canvas-pixelart/releases).
 
 Clone git repository:
 
-    $ git clone git://github.com/niklasvh/html2canvas.git
+    $ git clone git://github.com/Kriegberg/html2canvas-pixelart.git
 
 Install dependencies:
 
@@ -67,7 +63,3 @@ Build browser bundle
 ### Examples ###
 
 For more information and examples, please visit the [homepage](https://html2canvas.hertzen.com) or try the [test console](https://html2canvas.hertzen.com/tests/).
-
-### Contributing ###
-
-If you wish to contribute to the project, please send the pull requests to the develop branch. Before submitting any changes, try and test that the changes work with all the support browsers. If some CSS property isn't supported or is incomplete, please create appropriate tests for it as well before submitting any code changes.
