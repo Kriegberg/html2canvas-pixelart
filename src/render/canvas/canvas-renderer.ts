@@ -278,10 +278,10 @@ export class CanvasRenderer extends Renderer {
                 this.ctx.clip();
     
                 // Disabling image smoothing to render pixel art properly
-                this.ctx.imageSmoothingEnabled = false;
-                this.ctx.webkitImageSmoothingEnabled = false;
-                this.ctx.mozImageSmoothingEnabled = false;
-    
+                (this.ctx as any).imageSmoothingEnabled = false;
+                (this.ctx as any).webkitImageSmoothingEnabled = false;
+                (this.ctx as any).mozImageSmoothingEnabled = false;
+                
                 this.ctx.drawImage(
                     image,
                     0,
@@ -586,7 +586,7 @@ export class CanvasRenderer extends Renderer {
         const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
         
         // Disabling image smoothing to render pixel art properly
-        ctx.imageSmoothingEnabled = false;
+        (ctx as any).imageSmoothingEnabled = false;
     
         ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
         return canvas;
