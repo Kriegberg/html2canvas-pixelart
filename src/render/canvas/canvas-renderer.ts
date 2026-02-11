@@ -264,33 +264,39 @@ export class CanvasRenderer extends Renderer {
             });
         });
     }
-
+    
     renderReplacedElement(
-        container: ReplacedElementContainer,
-        curves: BoundCurves,
-        image: HTMLImageElement | HTMLCanvasElement
-    ): void {
-        if (image && container.intrinsicWidth > 0 && container.intrinsicHeight > 0) {
-            const box = contentBox(container);
-            const path = calculatePaddingBoxPath(curves);
-            this.path(path);
-            this.ctx.save();
-            this.ctx.clip();
-            this.ctx.drawImage(
-                image,
-                0,
-                0,
-                container.intrinsicWidth,
-                container.intrinsicHeight,
-                box.left,
-                box.top,
-                box.width,
-                box.height
-            );
-            this.ctx.restore();
+            container: ReplacedElementContainer,
+            curves: BoundCurves,
+            image: HTMLImageElement | HTMLCanvasElement
+        ): void {
+            if (image && container.intrinsicWidth > 0 && container.intrinsicHeight > 0) {
+                const box = contentBox(container);
+                const path = calculatePaddingBoxPath(curves);
+                this.path(path);
+                this.ctx.save();
+                this.ctx.clip();
+    
+                // Disabling image smoothing to render pixel art properly
+                this.ctx.imageSmoothingEnabled = false;
+                this.ctx.webkitImageSmoothingEnabled = false;
+                this.ctx.mozImageSmoothingEnabled = false;
+    
+                this.ctx.drawImage(
+                    image,
+                    0,
+                    0,
+                    container.intrinsicWidth,
+                    container.intrinsicHeight,
+                    box.left,
+                    box.top,
+                    box.width,
+                    box.height
+                );
+                this.ctx.restore();
+            }
         }
-    }
-
+    
     async renderNodeContent(paint: ElementPaint): Promise<void> {
         this.applyEffects(paint.getEffects(EffectTarget.CONTENT));
         const container = paint.container;
@@ -572,12 +578,16 @@ export class CanvasRenderer extends Renderer {
         if (image.width === width && image.height === height) {
             return image;
         }
-
+    
         const ownerDocument = this.canvas.ownerDocument ?? document;
         const canvas = ownerDocument.createElement('canvas');
         canvas.width = Math.max(1, width);
         canvas.height = Math.max(1, height);
         const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+        
+        // Disabling image smoothing to render pixel art properly
+        ctx.imageSmoothingEnabled = false;
+    
         ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, width, height);
         return canvas;
     }
